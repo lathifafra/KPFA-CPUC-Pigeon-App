@@ -1,0 +1,65 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KPFA CPUC Pigeon App</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#10182b;color:white}
+header{background:#b91c2c;text-align:center;padding:24px 12px}
+header h1{margin:0;font-size:27px}
+header p{margin:8px 0 0}
+main{padding:20px;max-width:600px;margin:auto}
+h2{text-align:center;color:#ffd166}
+.clubs{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.club{padding:24px 8px;border:2px solid #e8c66a;border-radius:14px;text-align:center;cursor:pointer}
+.club h3{font-size:24px;margin:8px 0}
+.kpfa{background:linear-gradient(145deg,#b91c2c,#57101a)}
+.cpuc{background:linear-gradient(145deg,#d6a329,#76500a)}
+.pigeon{font-size:42px}
+#details{display:none;background:#202c43;margin-top:20px;padding:18px;border-radius:12px}
+button{padding:11px 16px;border:0;border-radius:8px;background:#e8c66a;color:#171717;font-weight:bold}
+footer{text-align:center;color:#bbb;padding:25px;font-size:13px}
+</style>
+</head>
+<body>
+<header>
+<h1>🐦 KPFA • CPUC</h1>
+<p>PIGEON FRIENDS ASSOCIATION</p>
+</header>
+<main>
+<h2>Welcome to Pigeon App</h2>
+<div class="clubs">
+<div class="club kpfa" onclick="showClub('KPFA')">
+<div class="pigeon">🕊️</div>
+<h3>KPFA</h3>
+<p>Karumbukkadai Pigeon Friends Association</p>
+</div>
+<div class="club cpuc" onclick="showClub('CPUC')">
+<div class="pigeon">🕊️</div>
+<h3>CPUC</h3>
+<p>Coimbatore Pigeon Unity Club</p>
+</div>
+</div>
+<div id="details">
+<h2 id="clubTitle"></h2>
+<p>Welcome! Pigeon competition details and results will appear here.</p>
+<button onclick="goBack()">Back</button>
+</div>
+</main>
+<footer>KPFA • CPUC | Pigeon Competition App</footer>
+<script>
+function showClub(name){
+document.querySelector('.clubs').style.display='none';
+document.getElementById('details').style.display='block';
+document.getElementById('clubTitle').textContent=name;
+}
+function goBack(){
+document.querySelector('.clubs').style.display='grid';
+document.getElementById('details').style.display='none';
+}
+</script>
+</body>
+</html>
