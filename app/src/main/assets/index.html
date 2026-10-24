@@ -7,135 +7,201 @@
 <title>KPFA CPUC Pigeon App</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial;background:#07152e;color:white}
-.header{text-align:center;padding:22px 8px;background:#101f40;border-bottom:3px solid #d4af37}
-.logo{font-size:42px}
-h1{color:#ffd966;margin:8px}
-.subtitle{font-size:12px;letter-spacing:1px}
-.container{padding:18px;max-width:450px;margin:auto}
-.panel,.card{background:#132747;padding:20px;margin:15px 0;border:1px solid #d4af37;border-radius:15px}
-h2,h3{color:#ffd966;text-align:center}
-label{display:block;margin:14px 0 6px}
-input[type=text],input[type=password]{width:100%;padding:13px;border-radius:8px;border:1px solid #d4af37;background:#07152e;color:white;font-size:16px}
-button{width:100%;padding:13px;margin-top:12px;border:0;border-radius:8px;background:#d4af37;color:#07152e;font-size:16px;font-weight:bold}
-.back{background:white}
-.small{text-align:center;color:#d9e2f2;font-size:13px}
-#homePage,#clubPage,#sectionPage{display:none}
+body{margin:0;font-family:Arial,sans-serif;background:#101b35;color:#fff}
+header{background:#172b50;padding:20px;text-align:center;border-bottom:3px solid #dcae45}
+h1{color:#f5cf70;font-size:23px;margin:0 0 8px}
+h2{color:#f5cf70}
+main{max-width:600px;margin:auto;padding:18px}
+.panel{background:#1b2b4b;padding:18px;border-radius:14px;margin:14px 0}
+input,textarea,button{width:100%;padding:12px;margin:7px 0;border-radius:8px;font-size:16px}
+input,textarea{border:1px solid #7183a4;background:#fff;color:#111}
+button{border:0;background:#dcae45;color:#17213b;font-weight:bold;cursor:pointer}
+.secondary{background:#344766;color:white}
+.item{background:#253b60;padding:12px;border-radius:8px;margin:8px 0;overflow-wrap:anywhere}
+.small{font-size:13px;color:#d6dff0}
+.hidden{display:none}
 </style>
 </head>
 <body>
-
-<div class="header">
-<div class="logo">🐦</div>
+<header>
 <h1>KPFA • CPUC</h1>
-<div class="subtitle">PIGEON FRIENDS ASSOCIATION</div>
-</div>
+<div>Karumbukkadai Pigeon Friends Association</div>
+</header>
+<main>
+<section id="login" class="panel">
+<h2>Member Login</h2>
+<p class="small">Use your registered email and password.</p>
+<input id="email" type="email" placeholder="Email address" autocomplete="email">
+<input id="password" type="password" placeholder="Password" autocomplete="current-password">
+<button onclick="loginUser()">Login</button>
+<button class="secondary" onclick="registerUser()">Create Account</button>
+<p id="authMessage"></p>
+</section>
 
-<div class="container">
+<section id="home" class="hidden">
+<div class="panel">
+<h2>Welcome</h2>
+<p id="userEmail" class="small"></p>
+<button onclick="openClub('KPFA')">KPFA Pigeon Club</button>
+<button onclick="openClub('CPUC')">CPUC Pigeon Club</button>
+<button class="secondary" onclick="logoutUser()">Logout</button>
+</div>
+</section>
 
-<div class="panel" id="loginPage">
-<h2>🔐 LOGIN</h2>
-<label>Login ID</label>
-<input id="username" type="text" placeholder="Enter Login ID">
-<label>Password</label>
-<input id="password" type="password" placeholder="Enter Password">
-<label><input id="showPassword" type="checkbox" style="width:auto"> Show Password</label>
-<button onclick="login()">LOGIN</button>
-<p id="message" class="small"></p>
-<p class="small">KPFA • CPUC Pigeon App</p>
-</div>
-
-<div id="homePage">
-<div class="card" onclick="openClub('KPFA')">
-<h2>🐦 KPFA</h2>
-<p class="small">Karumbukkadai Pigeon Friends Association</p>
-<button>OPEN KPFA</button>
-</div>
-<div class="card" onclick="openClub('CPUC')">
-<h2>🐦 CPUC</h2>
-<p class="small">Coimbatore Pigeon Unity Welfare Association</p>
-<button>OPEN CPUC</button>
-</div>
-<button class="back" onclick="logout()">LOGOUT</button>
-</div>
-
-<div id="clubPage" class="panel">
+<section id="club" class="hidden">
+<div class="panel">
 <h2 id="clubTitle"></h2>
-<div id="kpfaMenu">
-<button onclick="openSection('🏆 Competition Results')">🏆 Competition Results</button>
-<button onclick="openSection('🕊️ Race Details')">🕊️ Race Details</button>
-<button onclick="openSection('👥 Participants')">👥 Participants</button>
-<button onclick="openSection('🥇 Championship')">🥇 Championship</button>
+<button onclick="openSection('Competition Results')">Competition Results</button>
+<button onclick="openSection('Race Details')">Race Details</button>
+<button onclick="openSection('Participants')">Participants</button>
+<button onclick="openSection('Championship')">Championship</button>
+<button class="secondary" onclick="goHome()">Back</button>
 </div>
-<div id="cpucInfo" class="small" style="display:none">
-Welcome to CPUC Pigeon Association!
-</div>
-<button class="back" onclick="goHome()">BACK TO HOME</button>
-</div>
+</section>
 
-<div id="sectionPage" class="panel">
+<section id="details" class="hidden">
+<div class="panel">
 <h2 id="sectionTitle"></h2>
-<p class="small" id="sectionText"></p>
-<button class="back" onclick="backToKPFA()">BACK TO KPFA</button>
+<input id="recordTitle" placeholder="Title / Race / Participant name">
+<textarea id="recordText" rows="4" placeholder="Enter result, timing, points or details"></textarea>
+<button onclick="saveRecord()">Save Online</button>
+<button class="secondary" onclick="loadRecords()">Refresh Records</button>
+<button class="secondary" onclick="backToClub()">Back</button>
+<p id="saveMessage" class="small"></p>
 </div>
-
+<div class="panel">
+<h2>Saved Records</h2>
+<div id="records">Loading...</div>
 </div>
+</section>
+</main>
 
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-database-compat.js"></script>
 <script>
-document.getElementById("showPassword").addEventListener("change",function(){
-document.getElementById("password").type=this.checked?"text":"password";
+const firebaseConfig = {
+  apiKey: "AIzaSyD9_4Fq2UpnVmYf8J7ERswACoFM-YiTexk",
+  authDomain: "kpfa-cpuc.firebaseapp.com",
+  databaseURL: "https://kpfa-cpuc-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "kpfa-cpuc",
+  storageBucket: "kpfa-cpuc.firebasestorage.app",
+  messagingSenderId: "445696991705",
+  appId: "1:445696991705:web:076102fbe42afa2c7239c8"
+};
+
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+const db = firebase.database();
+
+let currentClub = "KPFA";
+let currentSection = "Competition Results";
+
+function show(id){
+  ["login","home","club","details"].forEach(x =>
+    document.getElementById(x).classList.toggle("hidden",x!==id)
+  );
+}
+
+function loginUser(){
+  const email=document.getElementById("email").value.trim();
+  const password=document.getElementById("password").value;
+  auth.signInWithEmailAndPassword(email,password)
+    .catch(e=>document.getElementById("authMessage").textContent=e.message);
+}
+
+function registerUser(){
+  const email=document.getElementById("email").value.trim();
+  const password=document.getElementById("password").value;
+  if(password.length<6){
+    document.getElementById("authMessage").textContent="Password must be at least 6 characters.";
+    return;
+  }
+  auth.createUserWithEmailAndPassword(email,password)
+    .catch(e=>document.getElementById("authMessage").textContent=e.message);
+}
+
+function logoutUser(){auth.signOut()}
+
+auth.onAuthStateChanged(user=>{
+  if(user){
+    document.getElementById("userEmail").textContent=user.email;
+    show("home");
+  }else{
+    show("login");
+  }
 });
 
-function login(){
-var u=document.getElementById("username").value.trim();
-var p=document.getElementById("password").value;
-if((u==="admin"&&p==="admin123")||(u==="member"&&p==="member123")){
-document.getElementById("loginPage").style.display="none";
-document.getElementById("homePage").style.display="block";
-document.getElementById("message").innerText="";
-}else{
-document.getElementById("message").innerText="Incorrect Login ID or Password";
-}
-}
-
 function openClub(club){
-document.getElementById("homePage").style.display="none";
-document.getElementById("clubPage").style.display="block";
-document.getElementById("sectionPage").style.display="none";
-document.getElementById("clubTitle").innerText=club;
-document.getElementById("kpfaMenu").style.display=club==="KPFA"?"block":"none";
-document.getElementById("cpucInfo").style.display=club==="CPUC"?"block":"none";
+  currentClub=club;
+  document.getElementById("clubTitle").textContent=club+" Pigeon Club";
+  show("club");
 }
 
 function openSection(section){
-document.getElementById("clubPage").style.display="none";
-document.getElementById("sectionPage").style.display="block";
-document.getElementById("sectionTitle").innerText=section;
-document.getElementById("sectionText").innerText="KPFA "+section+" details will be added here.";
+  currentSection=section;
+  document.getElementById("sectionTitle").textContent=currentClub+" - "+section;
+  document.getElementById("recordTitle").value="";
+  document.getElementById("recordText").value="";
+  document.getElementById("saveMessage").textContent="";
+  show("details");
+  loadRecords();
 }
 
-function backToKPFA(){
-document.getElementById("sectionPage").style.display="none";
-document.getElementById("clubPage").style.display="block";
+function recordPath(){
+  return "clubs/"+currentClub+"/"+currentSection.replace(/\s+/g,"_");
 }
 
-function goHome(){
-document.getElementById("clubPage").style.display="none";
-document.getElementById("sectionPage").style.display="none";
-document.getElementById("homePage").style.display="block";
+function saveRecord(){
+  const user=auth.currentUser;
+  if(!user){return}
+  const title=document.getElementById("recordTitle").value.trim();
+  const detail=document.getElementById("recordText").value.trim();
+  if(!title||!detail){
+    document.getElementById("saveMessage").textContent="Enter both title and details.";
+    return;
+  }
+  const item={title,detail,createdAt:Date.now(),createdBy:user.email};
+  db.ref(recordPath()).push(item)
+    .then(()=>{
+      document.getElementById("saveMessage").textContent="Saved online successfully!";
+      document.getElementById("recordTitle").value="";
+      document.getElementById("recordText").value="";
+      loadRecords();
+    })
+    .catch(e=>document.getElementById("saveMessage").textContent="Error: "+e.message);
 }
 
-function logout(){
-document.getElementById("homePage").style.display="none";
-document.getElementById("clubPage").style.display="none";
-document.getElementById("sectionPage").style.display="none";
-document.getElementById("loginPage").style.display="block";
-document.getElementById("username").value="";
-document.getElementById("password").value="";
+function loadRecords(){
+  const target=document.getElementById("records");
+  target.textContent="Loading...";
+  db.ref(recordPath()).once("value")
+    .then(snapshot=>{
+      target.innerHTML="";
+      if(!snapshot.exists()){
+        target.textContent="No records yet.";
+        return;
+      }
+      snapshot.forEach(child=>{
+        const r=child.val();
+        const item=document.createElement("div");
+        item.className="item";
+        const title=document.createElement("strong");
+        title.textContent=r.title||"Record";
+        const detail=document.createElement("p");
+        detail.textContent=r.detail||"";
+        const by=document.createElement("div");
+        by.className="small";
+        by.textContent="Added by: "+(r.createdBy||"Member");
+        item.append(title,detail,by);
+        target.appendChild(item);
+      });
+    })
+    .catch(e=>target.textContent="Database error: "+e.message);
 }
-document.getElementById("password").addEventListener("keydown",function(e){
-if(e.key==="Enter")login();
-});
+
+function goHome(){show("home")}
+function backToClub(){show("club")}
 </script>
 </body>
 </html>
