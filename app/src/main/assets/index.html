@@ -26,33 +26,17 @@ button{border:0;background:#dcae45;color:#17213b;font-weight:bold;cursor:pointer
 .competition-card .date{font-weight:bold;color:#f5cf70}
 .competition-card .type{font-size:13px}
 .result-line{white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.65}
-
 /* Member result popup */
-#competitionDetail.popup-open{
- position:fixed;inset:0;z-index:9999;margin:0;border-radius:0;
- background:rgba(5,10,24,.96);padding:18px;overflow-y:auto;
- display:flex;flex-direction:column;justify-content:flex-start;box-shadow:none
-}
+#competitionDetail.popup-open{position:fixed;inset:0;z-index:9999;margin:0;border-radius:0;background:rgba(5,10,24,.96);padding:18px;overflow-y:auto;display:flex;flex-direction:column;justify-content:flex-start;box-shadow:none}
 #competitionDetail.popup-open h2{text-align:center;margin-top:8px}
 #competitionDetail.popup-open #competitionDetailTitle{font-size:20px}
-#competitionDetail.popup-open #competitionDetailText{
- display:grid;grid-template-columns:1fr;gap:10px;white-space:normal
-}
-.rank-card{
- background:linear-gradient(135deg,#253b60,#172b50);
- border:1px solid #dcae45;border-radius:12px;padding:13px;
- color:#fff;overflow-wrap:anywhere;box-shadow:0 5px 16px #0003
-}
+#competitionDetail.popup-open #competitionDetailText{display:grid;grid-template-columns:1fr;gap:10px;white-space:normal}
+.rank-card{background:linear-gradient(135deg,#253b60,#172b50);border:1px solid #dcae45;border-radius:12px;padding:13px;color:#fff;overflow-wrap:anywhere;box-shadow:0 5px 16px #0003}
 .rank-card .rank-label{color:#f5cf70;font-weight:bold;font-size:17px;margin-bottom:6px}
 .rank-card .rank-detail{white-space:pre-wrap;line-height:1.6}
 .rank-card:nth-child(1){border-width:2px}
 #competitionDetail.popup-open button{flex-shrink:0}
-@media(min-width:500px){
- #competitionDetail.popup-open{
-  inset:4vh 5vw;border:2px solid #dcae45;border-radius:18px;
-  max-width:650px;margin:auto;height:92vh
- }
-}
+@media(min-width:500px){#competitionDetail.popup-open{inset:4vh 5vw;border:2px solid #dcae45;border-radius:18px;max-width:650px;margin:auto;height:92vh}}
 </style>
 </head>
 <body>
@@ -69,14 +53,10 @@ button{border:0;background:#dcae45;color:#17213b;font-weight:bold;cursor:pointer
 <button class="secondary" onclick="showRegister()">Create Account</button>
 <p id="authMessage" class="small" role="status"></p>
 </section>
-
 <section id="register" class="panel hidden">
 <h2>Register</h2>
 <label for="regClub">Club</label>
-<select id="regClub">
-<option value="KPFA">KPFA - Local</option>
-<option value="CPUC">CPUC - District Level</option>
-</select>
+<select id="regClub"><option value="KPFA">KPFA - Local</option><option value="CPUC">CPUC - District Level</option></select>
 <input id="loftName" placeholder="Loft Name" autocomplete="organization">
 <input id="ownerName" placeholder="Loft Owner" autocomplete="name">
 <input id="contactNumber" type="tel" placeholder="Contact Number" autocomplete="tel">
@@ -87,816 +67,368 @@ button{border:0;background:#dcae45;color:#17213b;font-weight:bold;cursor:pointer
 <button class="secondary" onclick="show('login')">Back to Login</button>
 <p id="regMessage" class="small" role="status"></p>
 </section>
-
 <section id="pending" class="panel hidden">
-<h2>Pending Approval</h2>
-<p>Your registration has been submitted.</p>
-<p>Please wait for Admin approval.</p>
-<p id="pendingInfo" class="small"></p>
-<button class="secondary" onclick="logoutUser()">Logout</button>
+<h2>Pending Approval</h2><p>Your registration has been submitted.</p><p>Please wait for Admin approval.</p>
+<p id="pendingInfo" class="small"></p><button class="secondary" onclick="logoutUser()">Logout</button>
 </section>
-
 <section id="admin" class="panel hidden">
-<h2>Admin Approval</h2>
-<p class="small">Pending member registrations</p>
-<div id="pendingMembers">Loading...</div>
+<h2>Admin Approval</h2><p class="small">Pending member registrations</p><div id="pendingMembers">Loading...</div>
 <button class="secondary" onclick="loadPendingMembers()">Refresh Requests</button>
-<button class="secondary" onclick="goHome()">Back</button>
-<button class="secondary" onclick="logoutUser()">Logout</button>
+<button class="secondary" onclick="goHome()">Back</button><button class="secondary" onclick="logoutUser()">Logout</button>
 </section>
-
-<section id="home" class="hidden">
-<div class="panel">
-<h2>Welcome</h2>
-<p id="userEmail" class="small"></p>
-<p id="memberInfo" class="small"></p>
-<button onclick="openClub('KPFA')">KPFA - Local</button>
-<button onclick="openClub('CPUC')">CPUC - District Level</button>
-<button id="adminButton" class="hidden" onclick="showAdmin()">Admin Approval</button>
-<button class="secondary" onclick="logoutUser()">Logout</button>
-</div>
-</section>
-
-<section id="club" class="hidden">
-<div class="panel">
+<section id="home" class="hidden"><div class="panel">
+<h2>Welcome</h2><p id="userEmail" class="small"></p><p id="memberInfo" class="small"></p>
+<button onclick="openClub('KPFA')">KPFA - Local</button><button onclick="openClub('CPUC')">CPUC - District Level</button>
+<button id="adminButton" class="hidden" onclick="showAdmin()">Admin Approval</button><button class="secondary" onclick="logoutUser()">Logout</button>
+</div></section>
+<section id="club" class="hidden"><div class="panel">
 <h2 id="clubTitle"></h2>
 <button onclick="openSection('Competition Results')">COMPLETE RESULT</button>
 <button onclick="openSection('Race Details')">Race Details</button>
 <button onclick="openSection('Participants')">Participants</button>
 <button onclick="openSection('Championship')">Championship</button>
 <button class="secondary" onclick="goHome()">Back</button>
-</div>
-</section>
-
-<section id="details" class="hidden">
+</div></section> 
+ <section id="details" class="hidden">
 <div class="panel">
 <h2 id="sectionTitle"></h2>
-<div id="legacyEditor">
-<input id="recordTitle" placeholder="Title / Race / Participant name">
-<textarea id="recordText" rows="4" placeholder="Enter result, timing, points or details"></textarea>
-<button id="saveRecordButton" onclick="saveRecord()">Save Online</button>
-<button class="secondary" onclick="loadRecords()">Refresh Records</button>
+<div id="records"></div>
+<div id="adminTools" class="hidden">
+<h2>ADMIN TOOLS</h2>
+<label for="recordTitle">Title</label>
+<input id="recordTitle" placeholder="Enter title">
+<label for="recordText">Details</label>
+<textarea id="recordText" rows="5" placeholder="Enter details"></textarea>
+<button onclick="saveRecord()">SAVE DETAILS</button>
+<p id="saveMessage" class="small"></p>
 </div>
-
-<div id="competitionAdmin" class="hidden">
-<h2>ADMIN - ADD / UPDATE COMPETITION</h2>
-<label for="competitionSlot">Competition Icon</label>
-<select id="competitionSlot"></select>
-<label for="competitionDate">Date</label>
-<input id="competitionDate" type="date">
-<label for="competitionDuration">Duration</label>
-<select id="competitionDuration">
-<option>ONE DAY</option>
-<option>TWO DAYS</option>
-<option>THREE DAYS</option>
-<option>SEVEN DAYS</option>
-</select>
-<label for="competitionType">Pigeon Type</label>
-<select id="competitionType">
-<option>KARNAM PIGEON</option>
-<option>HY FLYER PIGEON</option>
-</select>
-<textarea id="competitionResult" rows="8" placeholder="RANK 1&#10;LOFT NAME:&#10;BIRDS FLYING TIME:&#10;TOTAL FLYING TIME:"></textarea>
-<button onclick="saveCompetition()">SAVE / UPDATE COMPETITION</button>
-<p id="competitionMessage" class="small" role="status"></p>
-</div>
-
-<div id="competitionGrid" class="competition-grid"></div>
-<div id="competitionDetail" class="hidden panel">
-<h2 id="competitionDetailTitle"></h2>
-<div id="competitionDetailText" class="result-line"></div>
-<button id="editCompetitionButton" class="hidden" onclick="editSelectedCompetition()">EDIT RESULT (ADMIN)</button>
-<button class="secondary" onclick="closeCompetition()">BACK TO COMPLETE RESULT</button>
-</div>
-
-<button class="secondary" onclick="backToClub()">Back to Club</button>
-<p id="saveMessage" class="small" role="status"></p>
-</div>
-
-<div id="legacyRecordsPanel" class="panel">
-<h2>Saved Records</h2>
-<div id="records">Sign in to view records.</div>
+<button class="secondary" onclick="goBack()">BACK</button>
 </div>
 </section>
-  </main>
-  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<section id="competitionDetail" class="panel hidden">
+<h2 id="competitionDetailTitle"></h2>
+<div id="competitionDetailText" class="result-line"></div>
+<button class="secondary" onclick="closeCompetitionDetail()">CLOSE</button>
+</section>
+<section id="competitionAdmin" class="panel hidden">
+<h2>EDIT COMPETITION (ADMIN)</h2>
+<label for="competitionSlot">Competition</label>
+<select id="competitionSlot">
+<option value="1">Competition 1</option>
+<option value="2">Competition 2</option>
+<option value="3">Competition 3</option>
+<option value="4">Competition 4</option>
+<option value="5">Competition 5</option>
+<option value="6">Competition 6</option>
+<option value="7">Competition 7</option>
+<option value="8">Competition 8</option>
+<option value="9">Competition 9</option>
+<option value="10">Competition 10</option>
+<option value="11">Competition 11</option>
+<option value="12">Competition 12</option>
+<option value="13">Competition 13</option>
+</select>
+<label for="competitionName">Competition Name</label>
+<input id="competitionName" placeholder="Competition name">
+<label for="competitionDate">Date</label>
+<input id="competitionDate" type="date">
+<label for="competitionType">Competition Type</label>
+<select id="competitionType">
+<option value="One Day">One Day</option>
+<option value="Two Days">Two Days</option>
+<option value="Three Days">Three Days</option>
+<option value="Seven Days">Seven Days</option>
+</select>
+<label for="competitionLoft">Loft Name</label>
+<input id="competitionLoft" placeholder="Loft name">
+<label for="competitionTime">Birds Flying Time</label>
+<input id="competitionTime" placeholder="Example: 12h 30m">
+<label for="competitionResult">Result Details</label>
+<textarea id="competitionResult" rows="5" placeholder="Enter competition results"></textarea>
+<button onclick="saveCompetition()">SAVE RESULT</button>
+<button class="secondary" onclick="editSelectedCompetition()">EDIT RESULT (ADMIN)</button>
+<p id="competitionMessage" class="small"></p>
+</section>
+</main>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-database-compat.js"></script>
 <script>
 const firebaseConfig = {
-  apiKey: "AIzaSyD9_4Fq2UpnVmYf8J7ERswACoFM-YiTexk",
+  apiKey: "AIzaSyDUMMY_KEY_REPLACE_WITH_YOUR_REAL_KEY",
   authDomain: "kpfa-cpuc.firebaseapp.com",
   databaseURL: "https://kpfa-cpuc-default-rtdb.asia-southeast1.firebasedatabase.app",
   projectId: "kpfa-cpuc",
   storageBucket: "kpfa-cpuc.firebasestorage.app",
-  messagingSenderId: "445696991705",
-  appId: "1:445696991705:web:076102fbe42afa2c7239c8"
+  messagingSenderId: "REPLACE_WITH_YOUR_SENDER_ID",
+  appId: "REPLACE_WITH_YOUR_APP_ID"
 };
+firebase.initializeApp(firebaseConfig);
+const auth=firebase.auth();
+const db=firebase.database();
+let currentUser=null;
+let currentProfile=null;
+let currentClub="KPFA";
+let currentSection="";
+let selectedCompetitionId=null;
+const ADMIN_EMAIL="lathifafra@gmail.com";
 
-const ADMIN_EMAIL = "lathifafra@gmail.com";
-const COMPETITION_COUNT = 13;
-
-let auth = null, db = null, currentClub = "KPFA",
-    currentSection = "Competition Results";
-let currentProfile = null, authListenerStarted = false,
-    selectedCompetitionId = null;
-
-function show(id) {
-  ["login","register","pending","admin","home","club","details"]
-    .forEach(x => document.getElementById(x).classList.toggle("hidden", x !== id));
+function show(id){
+  document.querySelectorAll("main > section").forEach(section=>section.classList.add("hidden"));
+  const target=document.getElementById(id);
+  if(target)target.classList.remove("hidden");
 }
-
-function isAdmin() {
-  return !!(auth && auth.currentUser && auth.currentUser.email &&
-    auth.currentUser.email.toLowerCase() === ADMIN_EMAIL.toLowerCase());
+function showRegister(){show("register")}
+function isAdmin(){
+  return !!currentUser && currentUser.email===ADMIN_EMAIL;
 }
-
-function initializeFirebase() {
-  try {
-    if (typeof firebase === "undefined") {
-      document.getElementById("authMessage").textContent =
-        "Firebase SDK did not load. Check internet connection.";
-      return false;
-    }
-
-    if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
-
-    auth = firebase.auth();
-    db = firebase.database();
-
-    if (!authListenerStarted) {
-      authListenerStarted = true;
-      auth.onAuthStateChanged(handleAuthState);
-    }
-
-    populateCompetitionSlots();
-    return true;
-  } catch (error) {
-    document.getElementById("authMessage").textContent =
-      "Firebase setup error: " + error.message;
-    return false;
-  }
-}
-
-function showRegister() {
-  document.getElementById("regMessage").textContent = "";
-  show("register");
-}
-
-function loginUser() {
-  if (!auth && !initializeFirebase()) return;
-
-  const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value;
-
-  if (!email || !password) {
-    document.getElementById("authMessage").textContent =
-      "Please enter email and password.";
-    return;
-  }
-
-  document.getElementById("authMessage").textContent = "Logging in...";
-
-  auth.signInWithEmailAndPassword(email, password).catch(error => {
-    document.getElementById("authMessage").textContent =
-      "Login error: " + error.message;
+function loginUser(){
+  const email=document.getElementById("email").value.trim();
+  const password=document.getElementById("password").value;
+  document.getElementById("authMessage").textContent="Logging in...";
+  auth.signInWithEmailAndPassword(email,password).catch(error=>{
+    document.getElementById("authMessage").textContent=error.message;
   });
 }
-
-function registerUser() {
-  if (!auth && !initializeFirebase()) return;
-
-  const club = document.getElementById("regClub").value;
-  const loftName = document.getElementById("loftName").value.trim();
-  const ownerName = document.getElementById("ownerName").value.trim();
-  const contactNumber = document.getElementById("contactNumber").value.trim();
-  const areaName = document.getElementById("areaName").value.trim();
-  const email = document.getElementById("regEmail").value.trim();
-  const password = document.getElementById("regPassword").value;
-  const msg = document.getElementById("regMessage");
-
-  if (!loftName || !ownerName || !contactNumber ||
-      !areaName || !email || !password) {
-    msg.textContent = "Please fill in all fields.";
-    return;
-  }
-
-  if (!/^[0-9+()\-\s]{7,20}$/.test(contactNumber)) {
-    msg.textContent = "Please enter a valid contact number.";
-    return;
-  }
-
-  if (password.length < 6) {
-    msg.textContent = "Password must be at least 6 characters.";
-    return;
-  }
-
-  msg.textContent = "Creating account...";
-
-  auth.createUserWithEmailAndPassword(email, password)
-    .then(credential =>
-      db.ref("members/" + credential.user.uid).set({
-        club,
-        loftName,
-        ownerName,
-        contactNumber,
-        areaName,
-        email,
-        status: "pending",
-        role: "member",
-        createdAt: Date.now()
-      }).then(() => {
-        msg.textContent =
-          "Registration submitted. Waiting for Admin approval.";
-      })
-    )
-    .catch(error => {
-      msg.textContent = "Registration error: " + error.message;
-    });
+function registerUser(){
+  const email=document.getElementById("regEmail").value.trim();
+  const password=document.getElementById("regPassword").value;
+  const message=document.getElementById("regMessage");
+  if(password.length<6){message.textContent="Password must be at least 6 characters.";return;}
+  const profile={
+    club:document.getElementById("regClub").value,
+    loftName:document.getElementById("loftName").value.trim(),
+    ownerName:document.getElementById("ownerName").value.trim(),
+    contactNumber:document.getElementById("contactNumber").value.trim(),
+    areaName:document.getElementById("areaName").value.trim(),
+    email:email,
+    approved:false
+  };
+  message.textContent="Registering...";
+  auth.createUserWithEmailAndPassword(email,password).then(credential=>{
+    return db.ref("members/"+credential.user.uid).set(profile);
+  }).then(()=>{
+    message.textContent="Registration submitted. Wait for admin approval.";
+  }).catch(error=>message.textContent=error.message);
 }
-
-function handleAuthState(user) {
-  if (!user) {
-    currentProfile = null;
-    show("login");
-    document.getElementById("records").textContent =
-      "Please login to view records.";
-    return;
-  }
-
-  if (user.email && user.email.toLowerCase() === ADMIN_EMAIL.toLowerCase()) {
-    document.getElementById("userEmail").textContent = user.email;
-    document.getElementById("memberInfo").textContent = "Administrator";
-    document.getElementById("adminButton").classList.remove("hidden");
-    show("home");
-    return;
-  }
-
-  db.ref("members/" + user.uid).once("value").then(snapshot => {
-    if (!auth.currentUser || auth.currentUser.uid !== user.uid) return;
-
-    if (!snapshot.exists()) {
-      currentProfile = null;
-      document.getElementById("pendingInfo").textContent =
-        "Your profile was not found. Please contact Admin.";
-      show("pending");
-      return;
-    }
-
-    currentProfile = snapshot.val();
-
-    if (currentProfile.status !== "approved") {
-      document.getElementById("pendingInfo").textContent =
-        "Club: " + (currentProfile.club || "") +
-        " | Loft: " + (currentProfile.loftName || "");
-      show("pending");
-      return;
-    }
-
-    document.getElementById("userEmail").textContent = user.email || "";
-    document.getElementById("memberInfo").textContent =
-      (currentProfile.club || "") + " | " +
-      (currentProfile.loftName || "") + " | " +
-      (currentProfile.areaName || "");
-
-    document.getElementById("adminButton").classList.add("hidden");
-    show("home");
-  }).catch(error => {
-    document.getElementById("pendingInfo").textContent =
-      "Unable to check approval: " + error.message;
-    show("pending");
-  });
-}
-
-function logoutUser() {
-  if (auth) auth.signOut();
-}
-
-function showAdmin() {
-  if (!isAdmin()) {
-    show("pending");
-    return;
-  }
-
-  show("admin");
-  loadPendingMembers();
-}
-
-function loadPendingMembers() {
-  if (!isAdmin()) return;
-
-  const target = document.getElementById("pendingMembers");
-  target.textContent = "Loading...";
-
-  db.ref("members").once("value").then(snapshot => {
-    target.replaceChildren();
-    let count = 0;
-
-    snapshot.forEach(child => {
-      const m = child.val() || {};
-      if (m.status !== "pending") return;
-
-      count++;
-
-      const card = document.createElement("div");
-      card.className = "item";
-
-      const info = document.createElement("p");
-      info.textContent =
-        "Club: " + (m.club || "") +
-        "\nLoft Name: " + (m.loftName || "") +
-        "\nLoft Owner: " + (m.ownerName || "") +
-        "\nContact: " + (m.contactNumber || "") +
-        "\nPlace / Area: " + (m.areaName || "") +
-        "\nEmail: " + (m.email || "");
-      info.style.whiteSpace = "pre-line";
-
-      const approve = document.createElement("button");
-      approve.textContent = "Approve Member";
-      approve.onclick = () => approveMember(child.key);
-
-      card.append(info, approve);
-      target.appendChild(card);
-    });
-
-    if (!count) target.textContent = "No pending registrations.";
-  }).catch(error => {
-    target.textContent = "Error loading requests: " + error.message;
-  });
-}
-
-function approveMember(uid) {
-  if (!isAdmin()) return;
-  if (!confirm("Approve this member?")) return;
-
-  db.ref("members/" + uid + "/status")
-    .set("approved")
-    .then(loadPendingMembers)
-    .catch(error => alert("Approval failed: " + error.message));
-}
-
-function recordPath() {
-  return "clubs/" + currentClub + "/" +
-    currentSection.replace(/\s+/g, "_");
-}
-
-function canAccessClub(club) {
-  if (isAdmin()) return true;
-
-  return !!(
-    currentProfile &&
-    currentProfile.status === "approved" &&
-    currentProfile.club === club
-  );
-}
-
-function openClub(club) {
-  if (!canAccessClub(club)) {
-    alert("You are not approved for this club.");
-    return;
-  }
-
-  currentClub = club;
-
-  document.getElementById("clubTitle").textContent =
-    club === "KPFA" ? "KPFA - Local" : "CPUC - District Level";
-
+function logoutUser(){auth.signOut()}
+function goHome(){show("home")}
+function goBack(){show("club")}
+function openClub(club){
+  currentClub=club;
+  document.getElementById("clubTitle").textContent=club+" PIGEON CLUB";
   show("club");
 }
-
-function openSection(section) {
-  if (!canAccessClub(currentClub)) {
-    alert("Admin approval is required.");
-    return;
-  }
-
-  currentSection = section;
-
-  document.getElementById("sectionTitle").textContent =
-    (currentClub === "KPFA" ? "KPFA - Local" : "CPUC - District Level") +
-    " - " + section;
-
-  document.getElementById("saveMessage").textContent = "";
-
-  const isResults = section === "Competition Results";
-
-  document.getElementById("legacyEditor").classList.toggle(
-    "hidden", isResults || !isAdmin()
-  );
-
-  document.getElementById("legacyRecordsPanel").classList.toggle(
-    "hidden", isResults
-  );
-
-  document.getElementById("competitionAdmin").classList.toggle(
-    "hidden", !isResults || !isAdmin()
-  );
-
-  document.getElementById("competitionGrid").classList.toggle(
-    "hidden", !isResults
-  );
-
-  document.getElementById("competitionDetail").classList.add("hidden");
-
+function openSection(section){
+  currentSection=section;
+  document.getElementById("sectionTitle").textContent=section;
   show("details");
-
-  if (isResults) loadCompetitions();
-  else loadRecords();
+  loadRecords();
 }
-
-function saveRecord() {
-  if (!auth || !auth.currentUser) {
-    document.getElementById("saveMessage").textContent = "Please login first.";
-    return;
-  }
-
-  if (!isAdmin()) {
-    document.getElementById("saveMessage").textContent =
-      "Only Admin can add or update records.";
-    return;
-  }
-
-  const title = document.getElementById("recordTitle").value.trim();
-  const detail = document.getElementById("recordText").value.trim();
-
-  if (!title || !detail) {
-    document.getElementById("saveMessage").textContent =
-      "Enter both title and details.";
-    return;
-  }
-
-  document.getElementById("saveMessage").textContent = "Saving...";
-
-  db.ref(recordPath()).push({
-    title,
-    detail,
-    createdAt: Date.now(),
-    createdBy: auth.currentUser.email || ""
-  }).then(() => {
-    document.getElementById("saveMessage").textContent =
-      "Saved online successfully!";
-
-    document.getElementById("recordTitle").value = "";
-    document.getElementById("recordText").value = "";
-
-    loadRecords();
-  }).catch(error => {
-    document.getElementById("saveMessage").textContent =
-      "Database error: " + error.message;
-  });
-}
-
-function loadRecords() {
-  const target = document.getElementById("records");
-
-  if (!auth || !auth.currentUser) {
-    target.textContent = "Please login first.";
-    return;
-  }
-
-  if (!canAccessClub(currentClub)) {
-    target.textContent = "Admin approval is required.";
-    return;
-  }
-
-  target.textContent = "Loading records...";
-
-  db.ref(recordPath()).once("value").then(snapshot => {
-    target.replaceChildren();
-
-    if (!snapshot.exists()) {
-      target.textContent = "No records yet.";
-      return;
-    }
-
-    snapshot.forEach(child => {
-      const r = child.val() || {};
-      const item = document.createElement("div");
-      item.className = "item";
-
-      const title = document.createElement("strong");
-      title.textContent = r.title || "Record";
-
-      const detail = document.createElement("p");
-      detail.textContent = r.detail || "";
-
-      const by = document.createElement("div");
-      by.className = "small";
-      by.textContent = "Added by: " + (r.createdBy || "Admin");
-
-      item.append(title, detail, by);
+function showAdmin(){show("admin");loadPendingMembers()}
+function loadPendingMembers(){
+  const target=document.getElementById("pendingMembers");
+  target.textContent="Loading...";
+  db.ref("members").once("value").then(snapshot=>{
+    target.innerHTML="";
+    snapshot.forEach(child=>{
+      const member=child.val()||{};
+      if(member.approved) return;
+      const item=document.createElement("div");
+      item.className="item";
+      item.textContent=(member.loftName||"")+"\n"+(member.email||"")+"\n"+(member.club||"");
+      const button=document.createElement("button");
+      button.textContent="APPROVE";
+      button.onclick=()=>approveMember(child.key);
+      item.appendChild(button);
       target.appendChild(item);
     });
-  }).catch(error => {
-    target.textContent = "Error loading records: " + error.message;
+  }).catch(error=>target.textContent=error.message);
+}
+function approveMember(uid){
+  if(!isAdmin())return;
+  db.ref("members/"+uid+"/approved").set(true).then(loadPendingMembers);
+}
+auth.onAuthStateChanged(user=>{
+  currentUser=user;
+  if(!user){currentProfile=null;show("login");return;}
+  db.ref("members/"+user.uid).once("value").then(snapshot=>{
+    currentProfile=snapshot.val();
+    if(isAdmin()){
+      document.getElementById("adminButton").classList.remove("hidden");
+      document.getElementById("userEmail").textContent=user.email;
+      show("home");
+    }else if(!currentProfile||!currentProfile.approved){
+      document.getElementById("pendingInfo").textContent=user.email;
+      show("pending");
+    }else{
+      document.getElementById("userEmail").textContent=user.email;
+      document.getElementById("memberInfo").textContent=(currentProfile.loftName||"")+" • "+(currentProfile.club||"");
+      show("home");
+    }
+  }).catch(error=>{
+    document.getElementById("authMessage").textContent=error.message;
   });
-} 
-  function competitionPath() {
-  return "clubs/" + currentClub + "/Competition_Results";
+});
+ function fillCompetitionForm(entry){
+  document.getElementById("competitionDate").value=entry.date||"";
+  document.getElementById("competitionDuration").value=entry.duration||"ONE DAY";
+  document.getElementById("competitionType").value=entry.type||"KARNAM PIGEON";
+  document.getElementById("competitionResult").value=entry.detail||"";
 }
 
-function competitionId(slot) {
-  return "competition_" + String(slot).padStart(2, "0");
-}
-
-function populateCompetitionSlots() {
-  const select = document.getElementById("competitionSlot");
-  if (!select) return;
-
-  select.replaceChildren();
-
-  for (let i = 1; i <= COMPETITION_COUNT; i++) {
-    const option = document.createElement("option");
-    option.value = String(i);
-    option.textContent = "COMPETITION " + String(i).padStart(2, "0");
-    select.appendChild(option);
-  }
-
-  select.value = "1";
-  select.addEventListener("change", () => loadCompetitionIntoForm(select.value));
-}
-
-function defaultCompetition(slot) {
-  if (Number(slot) === 1) {
-    return {
-      competitionId: competitionId(1),
-      date: "2026-06-21",
-      duration: "ONE DAY",
-      type: "KARNAM PIGEON",
-      detail: ""
-    };
-  }
-
-  return {
-    competitionId: competitionId(slot),
-    date: "",
-    duration: "ONE DAY",
-    type: "KARNAM PIGEON",
-    detail: ""
-  };
-}
-
-function loadCompetitions() {
-  if (!canAccessClub(currentClub)) return;
-
-  const grid = document.getElementById("competitionGrid");
-  grid.replaceChildren();
-  grid.textContent = "Loading competitions...";
-
-  db.ref(competitionPath()).once("value").then(snapshot => {
-    const entries = {};
-
-    snapshot.forEach(child => {
-      const value = child.val() || {};
-      if (value.competitionId) {
-        entries[value.competitionId] = { ...value, _key: child.key };
-      }
+function loadCompetitionIntoForm(slot){
+  if(!isAdmin())return;
+  db.ref(competitionPath()).once("value").then(snapshot=>{
+    let found=null;
+    snapshot.forEach(child=>{
+      const v=child.val()||{};
+      if(v.competitionId===competitionId(slot))found=v;
     });
-
-    grid.replaceChildren();
-
-    for (let i = 1; i <= COMPETITION_COUNT; i++) {
-      const id = competitionId(i);
-      const entry = entries[id] || defaultCompetition(i);
-      const isSet = !!(entries[id] && entries[id].date);
-
-      const card = document.createElement("button");
-      card.className = "competition-card";
-
-      const cup = document.createElement("span");
-      cup.className = "cup";
-      cup.textContent = "🏆";
-
-      const date = document.createElement("span");
-      date.className = "date";
-      date.textContent = entry.date
-        ? entry.date.split("-").reverse().join(".")
-        : "DATE NOT SET";
-
-      const duration = document.createElement("span");
-      duration.textContent = entry.duration || "ONE DAY";
-
-      const type = document.createElement("span");
-      type.className = "type";
-      type.textContent = entry.type || "KARNAM PIGEON";
-
-      card.replaceChildren(
-        cup, date, document.createElement("br"),
-        duration, document.createElement("br"), type
-      );
-
-      card.onclick = () => openCompetition(i, entries[id] || null);
-
-      if (!isSet && i !== 1) card.style.opacity = "0.8";
-
-      grid.appendChild(card);
-    }
-  }).catch(error => {
-    grid.textContent = "Unable to load competitions: " + error.message;
+    fillCompetitionForm(found||defaultCompetition(slot));
+  }).catch(error=>{
+    document.getElementById("competitionMessage").textContent="Load failed: "+error.message;
   });
 }
 
-function openCompetition(slot, entry) {
-  selectedCompetitionId = competitionId(slot);
+function editSelectedCompetition(){
+  const form=document.getElementById("competitionAdmin");
+  const message=document.getElementById("competitionMessage");
+  const slotSelect=document.getElementById("competitionSlot");
 
-  const detail = document.getElementById("competitionDetail");
-  detail.classList.remove("hidden");
-  detail.classList.add("popup-open");
-
-  document.getElementById("editCompetitionButton")
-    .classList.toggle("hidden", !isAdmin());
-
-  if (!entry) {
-    const base = defaultCompetition(slot);
-
-    document.getElementById("competitionDetailTitle").textContent =
-      (slot === 1
-        ? "21.06.2026"
-        : "COMPETITION " + String(slot).padStart(2, "0")) +
-      " - " + base.duration + " " + base.type;
-
-    renderCompetitionResult("RESULT NOT ADDED YET");
-
-    if (isAdmin()) {
-      document.getElementById("competitionSlot").value = String(slot);
-      fillCompetitionForm(base);
-      document.getElementById("competitionMessage").textContent =
-        "Add result details, then save.";
-    }
-  } else {
-    document.getElementById("competitionDetailTitle").textContent =
-      (entry.date
-        ? entry.date.split("-").reverse().join(".")
-        : "DATE NOT SET") +
-      " - " + (entry.duration || "") + " " + (entry.type || "");
-
-    renderCompetitionResult(entry.detail || "RESULT NOT ADDED YET");
-
-    if (isAdmin()) {
-      document.getElementById("competitionSlot").value = String(slot);
-      fillCompetitionForm(entry);
-    }
+  if(!auth||!auth.currentUser){
+    alert("Please login again.");
+    return;
   }
+  if(!isAdmin()){
+    alert("Admin login required. Please check your email.");
+    return;
+  }
+  if(!form||!message||!slotSelect){
+    alert("Admin form not found. Please check the app code.");
+    return;
+  }
+
+  let slot=1;
+  const match=String(selectedCompetitionId||"").match(/competition_(\d+)/);
+  if(match)slot=Number(match[1]);
+  else if(slotSelect.value)slot=Number(slotSelect.value);
+
+  if(slot<1||slot>COMPETITION_COUNT){
+    alert("Please select a valid competition.");
+    return;
+  }
+
+  slotSelect.value=String(slot);
+  form.classList.remove("hidden");
+  message.textContent="Loading competition details...";
+  loadCompetitionIntoForm(slot);
+
+  setTimeout(function(){
+    form.scrollIntoView({behavior:"smooth",block:"start"});
+  },150);
 }
 
-function fillCompetitionForm(entry) {
-  document.getElementById("competitionDate").value = entry.date || "";
-  document.getElementById("competitionDuration").value =
-    entry.duration || "ONE DAY";
-  document.getElementById("competitionType").value =
-    entry.type || "KARNAM PIGEON";
-  document.getElementById("competitionResult").value = entry.detail || "";
-}
-
-function loadCompetitionIntoForm(slot) {
-  if (!isAdmin()) return;
-
-  db.ref(competitionPath()).once("value").then(snapshot => {
-    let found = null;
-
-    snapshot.forEach(child => {
-      const value = child.val() || {};
-      if (value.competitionId === competitionId(slot)) found = value;
-    });
-
-    fillCompetitionForm(found || defaultCompetition(slot));
-  }).catch(error => {
-    document.getElementById("competitionMessage").textContent =
-      "Load failed: " + error.message;
-  });
-}
-
-function editSelectedCompetition() {
-  if (!isAdmin() || !selectedCompetitionId) return;
-
-  document.getElementById("competitionSlot").value =
-    selectedCompetitionId.split("_")[1];
-
-  document.getElementById("competitionAdmin").classList.remove("hidden");
-  document.getElementById("competitionMessage").textContent =
-    "Edit the fields above and save.";
-
-  document.getElementById("competitionAdmin")
-    .scrollIntoView({ behavior: "smooth", block: "start" });
-}
-
-function saveCompetition() {
-  if (!isAdmin()) {
+function saveCompetition(){
+  if(!isAdmin()){
     alert("Only Admin can save competition results.");
     return;
   }
 
-  const slot = Number(document.getElementById("competitionSlot").value);
-  const date = document.getElementById("competitionDate").value;
-  const duration = document.getElementById("competitionDuration").value;
-  const type = document.getElementById("competitionType").value;
-  const detail = document.getElementById("competitionResult").value.trim();
-  const msg = document.getElementById("competitionMessage");
+  const slot=Number(document.getElementById("competitionSlot").value);
+  const date=document.getElementById("competitionDate").value;
+  const duration=document.getElementById("competitionDuration").value;
+  const type=document.getElementById("competitionType").value;
+  const detail=document.getElementById("competitionResult").value.trim();
+  const msg=document.getElementById("competitionMessage");
 
-  if (!slot || slot < 1 || slot > COMPETITION_COUNT || !date || !detail) {
-    msg.textContent = "Select competition and enter date and complete result.";
+  if(!slot||slot<1||slot>COMPETITION_COUNT||!date||!detail){
+    msg.textContent="Select competition and enter date and complete result.";
     return;
   }
 
-  const id = competitionId(slot);
-  const payload = {
-    competitionId: id,
+  const id=competitionId(slot);
+  const payload={
+    competitionId:id,
     date,
     duration,
     type,
     detail,
-    updatedAt: Date.now(),
-    updatedBy: auth.currentUser.email || ""
+    updatedAt:Date.now(),
+    updatedBy:auth.currentUser.email||""
   };
 
-  msg.textContent = "Saving...";
+  msg.textContent="Saving...";
+  const ref=db.ref(competitionPath());
 
-  const ref = db.ref(competitionPath());
-
-  ref.once("value").then(snapshot => {
-    let key = null;
-
-    snapshot.forEach(child => {
-      if ((child.val() || {}).competitionId === id) key = child.key;
+  ref.once("value").then(snapshot=>{
+    let key=null;
+    snapshot.forEach(child=>{
+      if((child.val()||{}).competitionId===id)key=child.key;
     });
-
-    return (key ? ref.child(key) : ref.push()).set(payload);
-  }).then(() => {
-    msg.textContent =
-      "Competition " + String(slot).padStart(2, "0") + " saved successfully!";
-
-    selectedCompetitionId = id;
+    return (key?ref.child(key):ref.push()).set(payload);
+  }).then(()=>{
+    msg.textContent="Competition "+String(slot).padStart(2,"0")+" saved successfully!";
+    selectedCompetitionId=id;
     loadCompetitions();
-    openCompetition(slot, payload);
-  }).catch(error => {
-    msg.textContent = "Save failed: " + error.message;
+    openCompetition(slot,payload);
+  }).catch(error=>{
+    msg.textContent="Save failed: "+error.message;
   });
 }
 
-function renderCompetitionResult(rawText) {
-  const target = document.getElementById("competitionDetailText");
+function renderCompetitionResult(rawText){
+  const target=document.getElementById("competitionDetailText");
   target.replaceChildren();
 
-  const normalized = String(rawText || "RESULT NOT ADDED YET")
-    .replace(/\s+(?=RANK\s*\d+)/gi, "\n");
+  const normalized=String(rawText||"RESULT NOT ADDED YET")
+    .replace(/\s+(?=RANK\s*\d+)/gi,"\n");
 
-  const lines = normalized.split(/\n+/).map(line => line.trim()).filter(Boolean);
+  const lines=normalized.split(/\n+/).map(line=>line.trim()).filter(Boolean);
+  if(!lines.length)lines.push("RESULT NOT ADDED YET");
 
-  if (!lines.length) lines.push("RESULT NOT ADDED YET");
+  let rankCount=0;
+  lines.forEach(line=>{
+    const match=line.match(/^RANK\s*(\d+)\s*[:.-]?\s*(.*)$/i);
+    const card=document.createElement("div");
+    card.className="rank-card";
 
-  let rankCount = 0;
+    const label=document.createElement("div");
+    label.className="rank-label";
 
-  lines.forEach(line => {
-    const match = line.match(/^RANK\s*(\d+)\s*[:.-]?\s*(.*)$/i);
+    const detail=document.createElement("div");
+    detail.className="rank-detail";
 
-    const card = document.createElement("div");
-    card.className = "rank-card";
-
-    const label = document.createElement("div");
-    label.className = "rank-label";
-
-    const detail = document.createElement("div");
-    detail.className = "rank-detail";
-
-    if (match) {
-      const rank = Number(match[1]);
-
-      label.textContent =
-        (rank === 1 ? "🥇" :
-         rank === 2 ? "🥈" :
-         rank === 3 ? "🥉" : "🏅") + " RANK " + rank;
-
-      detail.textContent = match[2] || "";
+    if(match){
+      label.textContent=(Number(match[1])===1?"🥇":Number(match[1])===2?"🥈":Number(match[1])===3?"🥉":"🏅")+" RANK "+match[1];
+      detail.textContent=match[2]||"";
       rankCount++;
-    } else if (/^RESULT NOT ADDED YET$/i.test(line)) {
-      label.textContent = "🏆 RESULT";
-      detail.textContent = line;
-    } else {
-      label.textContent = rankCount === 0 ? "🏆 RESULT DETAILS" : "";
-      detail.textContent = line;
+    }else if(/^RESULT NOT ADDED YET$/i.test(line)){
+      label.textContent="🏆 RESULT";
+      detail.textContent=line;
+    }else{
+      label.textContent=rankCount===0?"🏆 RESULT DETAILS":"";
+      detail.textContent=line;
     }
 
-    if (label.textContent) card.appendChild(label);
+    if(label.textContent)card.appendChild(label);
     card.appendChild(detail);
     target.appendChild(card);
   });
 }
 
-function closeCompetition() {
-  const detail = document.getElementById("competitionDetail");
+function closeCompetition(){
+  const detail=document.getElementById("competitionDetail");
   detail.classList.add("hidden");
   detail.classList.remove("popup-open");
 }
 
-function goHome() {
-  if (isAdmin() || (currentProfile && currentProfile.status === "approved")) {
-    show("home");
-  } else {
-    show("pending");
-  }
+function goHome(){
+  if(isAdmin()||(currentProfile&&currentProfile.status==="approved"))show("home");
+  else show("pending");
 }
 
-function backToClub() {
+function backToClub(){
   show("club");
 }
 
